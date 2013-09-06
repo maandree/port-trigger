@@ -1,6 +1,11 @@
-JAVA=/usr/bin/java
-JAVAC=javac
-JAR=jar
+PREFIX = /usr
+BIN = /bin
+
+COMMAND = porttrigger
+
+JAVA = /usr/bin/java
+JAVAC = javac
+JAR = jar
 
 
 
@@ -10,7 +15,7 @@ all: bin/porttrigger
 
 bin/porttrigger: bin/porttrigger.jar
 	echo "#!$(JAVA) -jar" > "$@"
-	cat "$<" >> "$x@"
+	cat "$<" >> "$@"
 	chmod a+x "$@"
 
 bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
@@ -20,6 +25,18 @@ bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
 obj/%.class: src/%.java
 	mkdir -p obj
 	$(JAVAC) -g -cp src -s src -d obj $<
+
+
+
+.PHONY: install
+install: bin/porttrigger
+	install -D -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -m755 bin/porttrigger -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+
+
+.PHONY: uninstall
+uninstall:
+	rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
 
 
 
