@@ -8,7 +8,7 @@ JAR=jar
 all: bin/porttrigger
 
 
-bin/porttrigger: bin/porttrigger.jar
+bin/porttrigger: bin/PortTrigger.jar
 	echo "#!$(JAVA) -jar" > "$@"
 	cat "$<" >> "$@"
 
