@@ -29,10 +29,16 @@ public class PortTrigger
 	
 	ServerSocket sock = new ServerSocket(port);
 	for (;;)
-	    {
-		sock.accept().close();
-		System.out.println("Hello World");
+	{
+	    sock.accept().close();
+	    System.out.println("Hello World");
+	    try
+	    {   (new ProcessBuilder(command)).start().waitFor();
 	    }
+	    catch (final Exception ignore)
+	    {   /* ignore */
+	    }
+	}
     }
     
 }
