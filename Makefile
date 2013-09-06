@@ -38,7 +38,7 @@ obj/%.class: obj/%.java
 
 .PHONY: install
 install: bin/porttrigger
-	install -D -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -m755 bin/porttrigger -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
 	install -m644 COPYING LICENSE -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
