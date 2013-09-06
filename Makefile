@@ -1,11 +1,15 @@
-PREFIX = /usr
-BIN = /bin
-
-COMMAND = porttrigger
-
-JAVA = /usr/bin/java
+JAVA = java
 JAVAC = javac
 JAR = jar
+
+PREFIX = /usr
+BIN = /bin
+DATA = /share
+LICENSES = $(DATA)/licenses
+SHEBANG = /usr/bin/$(JAVA) -jar
+
+PKGNAME = port-trigger
+COMMAND = porttrigger
 
 
 
@@ -14,7 +18,7 @@ all: bin/porttrigger
 
 
 bin/porttrigger: bin/porttrigger.jar
-	echo "#!$(JAVA) -jar" > "$@"
+	echo "#!$(SHEBANG)" > "$@"
 	cat "$<" >> "$@"
 	chmod a+x "$@"
 
@@ -36,11 +40,16 @@ obj/%.class: obj/%.java
 install: bin/porttrigger
 	install -D -- "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -m755 bin/porttrigger -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
+	install -m644 COPYING LICENSE -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
 
 
 .PHONY: uninstall
 uninstall:
-	rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)/COPYING"
+	-rm -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)/LICENSE"
+	-rmdir -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
 
 
 
