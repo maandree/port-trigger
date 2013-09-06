@@ -12,7 +12,7 @@ bin/porttrigger: bin/porttrigger.jar
 	echo "#!$(JAVA) -jar" > "$@"
 	cat "$<" >> "$@"
 
-bin/porttrigger.jar: META-INF/MANIFEST.MF obj/porttrigger.class
+bin/porttrigger.java: META-INF/MANIFEST.MF obj/porttrigger.class
 	mkdir -p bin
 	$(JAR) cfm "$@" $^
 
