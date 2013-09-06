@@ -16,15 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import java.net.*;
 
 
 public class PortTrigger
 {
-    public static void main(final String... args)
+    public static void main(final String... args) throws Exception
     {
 	final int port = Integer.parseInt(args[0]);
 	final String[] command = new String[args.length - 1];
 	System.arraycopy(args, 1, command, 0, command.length);
+	
+	ServerSocket sock = new ServerSocket(port);
+	for (;;)
+	    {
+		sock.accept().close();
+		System.out.println("Hello World");
+	    }
     }
     
 }
