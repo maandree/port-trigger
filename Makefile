@@ -18,7 +18,7 @@ bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
 
 obj/%.class: src/%.java
 	mkdir -p obj
-	$(JAVAC) -g -cp src -s src -b obj $<
+	$(JAVAC) -g -cp src -s src -d obj $<
 
 
 
