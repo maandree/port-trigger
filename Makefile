@@ -22,9 +22,13 @@ bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
 	mkdir -p bin
 	$(JAR) cfm "$@" $^
 
-obj/%.class: src/%.java
+obj/%.java: src/%.java
 	mkdir -p obj
-	$(JAVAC) -g -cp src -s src -d obj $<
+	cp "$<" "$@"
+	sed -i 's/@COMMAND@/$(COMMAND)/g' "$@"
+
+obj/%.class: obj/%.java
+	$(JAVAC) -g -cp obj -s obj -d obj "$<"
 
 
 

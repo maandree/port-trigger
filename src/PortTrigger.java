@@ -23,6 +23,9 @@ public class PortTrigger
 {
     public static void main(final String... args) throws Exception
     {
+	if (args.length == 0)
+	    System.out.println("USAGE: @COMMAND@ PORT COMMAND_ARGUMENTS...");
+	
 	final int port = Integer.parseInt(args[0]);
 	final String[] command = new String[args.length - 1];
 	System.arraycopy(args, 1, command, 0, command.length);
