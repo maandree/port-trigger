@@ -31,12 +31,11 @@ public class PortTrigger
 	for (;;)
 	{
 	    sock.accept().close();
-	    System.out.println("Hello World");
 	    try
 	    {   (new ProcessBuilder(command)).start().waitFor();
 	    }
 	    catch (final Exception ignore)
-	    {   /* ignore */
+	    {   System.err.println("Failed to run command");
 	    }
 	}
     }
