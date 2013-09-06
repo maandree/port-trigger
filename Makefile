@@ -10,7 +10,8 @@ all: bin/porttrigger
 
 bin/porttrigger: bin/porttrigger.jar
 	echo "#!$(JAVA) -jar" > "$@"
-	cat "$<" >> "$@"
+	cat "$<" >> "$x@"
+	chmod a+x "$@"
 
 bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
 	mkdir -p bin
