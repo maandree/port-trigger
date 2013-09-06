@@ -20,10 +20,10 @@ bin/porttrigger: bin/porttrigger.jar
 
 bin/porttrigger.jar: META-INF/MANIFEST.MF obj/PortTrigger.class
 	mkdir -p bin
-	$(JAR) cfm "$@" $^
+	$(JAR) cfm "$@" META-INF/MANIFEST.MF -C obj PortTrigger.class
 
 obj/%.java: src/%.java
-	mkdir -p obj
+	mkdir -p $(shell dirname "$@")
 	cp "$<" "$@"
 	sed -i 's/@COMMAND@/$(COMMAND)/g' "$@"
 

@@ -24,7 +24,10 @@ public class PortTrigger
     public static void main(final String... args) throws Exception
     {
 	if (args.length == 0)
+	{
 	    System.out.println("USAGE: @COMMAND@ PORT COMMAND_ARGUMENTS...");
+	    return;
+	}
 	
 	final int port = Integer.parseInt(args[0]);
 	final String[] command = new String[args.length - 1];
@@ -35,10 +38,10 @@ public class PortTrigger
 	{
 	    sock.accept().close();
 	    try
-	    {   (new ProcessBuilder(command)).start().waitFor();
+	    {   (new ProcessBuilder(command)).start();
 	    }
 	    catch (final Exception ignore)
-	    {   System.err.println("Failed to run command");
+	    {   /* ignore */
 	    }
 	}
     }
