@@ -10,4 +10,5 @@ obj/
 *.swp
 *.class
 *.jar
+*.info
 
